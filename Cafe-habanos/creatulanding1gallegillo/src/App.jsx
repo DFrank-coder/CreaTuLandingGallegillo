@@ -23,7 +23,7 @@ function App() {
       <ItemListContainer greeting2="Usamos props para éstas cuestiones." />
 
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-        <button onClick={agregarAlCarrito} style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginRight: '10px' }}>
+        <button onClick={agregarAlCarrito} style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginRight: '8px' }}>
           Agregar al Carrito
         </button>
         <button onClick={quitarDelCarrito} style={{ padding: '0.5rem 1rem', fontSize: '1rem' }}>
