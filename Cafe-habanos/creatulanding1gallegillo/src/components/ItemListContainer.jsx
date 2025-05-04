@@ -1,10 +1,32 @@
-const ItemListContainer = ({ greeting, greeting1, greeting2 }) => (
-      <section style={{ padding: '2rem', textAlign: 'center' }}>
-        <h2>{greeting}</h2>
-        <h5>{greeting1}</h5>
-        <h3>{greeting2}</h3>
-      </section>
-  )
-  
-  export default ItemListContainer
-  
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { mockData } from '../data/products';
+import ItemList from './ItemList';
+
+const ItemListContainer = () => {
+  const { category } = useParams();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = new Promise((resolve) => {
+      setTimeout(() => {
+        if (category) {
+          resolve(mockData.filter(prod => prod.name.toLowerCase().includes(category)));
+        } else {
+          resolve(mockData);
+        }
+      }, 1500);
+    });
+
+    fetchData.then(data => setProducts(data));
+  }, [category]);
+
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h2>{category ? `Productos de ${category}` : 'Todos los productos'}</h2>
+      <ItemList products={products} />
+    </div>
+  );
+};
+
+export default ItemListContainer

@@ -1,37 +1,19 @@
-import { useState } from 'react'
-import NavBar from './components/NavBar'
-import ItemListContainer from './components/ItemListContainer'
+import { Route, Routes } from 'react-router-dom';
+import ItemDetailContainer from './components/ItemDetailContainer';
+import ItemListContainer from './components/ItemListContainer';
+import NavBar from './components/NavBar';
 
-function App() {
-  const [cantidad, setCantidad] = useState(0);
-
-  const agregarAlCarrito = () => {
-    setCantidad(prev => prev + 1);
-  };
-
-  const quitarDelCarrito = () => {
-    if (cantidad > 0) {
-      setCantidad(prev => prev - 1);
-    }
-  };
-
+const App = () => {
   return (
-    <>
-      <NavBar cantidad={cantidad} />
-      <ItemListContainer greeting="Bienvenidos a un encanto de sabores." />
-      <ItemListContainer greeting1="Éste es un proyecto para CoderHouse en el curso de React." />
-      <ItemListContainer greeting2="Usamos props para éstas cuestiones." />
-
-      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-        <button onClick={agregarAlCarrito} style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginRight: '8px' }}>
-          Agregar al Carrito
-        </button>
-        <button onClick={quitarDelCarrito} style={{ padding: '0.5rem 1rem', fontSize: '1rem' }}>
-          Quitar del Carrito
-        </button>
-      </div>
-    </>
+    <div>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<ItemListContainer />} />
+        <Route path="/category/:category" element={<ItemListContainer />} />
+        <Route path="/item/:id" element={<ItemDetailContainer />} />
+      </Routes>
+    </div>
   );
-}
+};
 
-export default App;
+export default App
